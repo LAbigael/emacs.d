@@ -1,0 +1,35 @@
+"5b8a12e3bd8009637eee9d431db392c96d4d27fc"
+#s(undo-tree [nil ([nil (#1=[nil nil ((1 . 824) ("
+import React, { useState, useMemo } from \"react\";
+
+import { classes as cls, getColor, View, ScrollView } from \"tw\";
+
+import { Title, Subtitle, Text } from \"components/typography\";
+import Card from \"components/Card\";
+
+import Badge from \"components/Badge\";
+import Stack from \"components/layout/Stack\";
+import Input from \"components/form/Input\";
+import Avatar from \"components/Avatar\";
+
+import Snackbar from \"components/Snackbar\";
+
+export default ({ equipments }) => {
+  return (
+    <>
+      <Text>Equipment</Text>
+      <Stack horizontal>
+        {Object.keys(equipments).map(equipment => (
+          <Card>
+            <Card.Title>{equipment}</Card.Title>
+            <Card.Content>
+              <span>{equipments[equipment]}</span>
+            </Card.Content>
+          </Card>
+        ))}
+      </Stack>
+    </>
+  );
+};
+" . 1) (undo-tree-id0 . -1) (undo-tree-id1 . -1) (undo-tree-id2 . -823) (undo-tree-id3 . -467) (undo-tree-id4 . -820) (undo-tree-id5 . -478) (undo-tree-id6 . -815) (undo-tree-id7 . -485) (undo-tree-id8 . -807) (undo-tree-id9 . -539) (undo-tree-id10 . -792) (undo-tree-id11 . -591) (undo-tree-id12 . -780) (undo-tree-id13 . -608) (undo-tree-id14 . -762) (undo-tree-id15 . -684) (undo-tree-id16 . -734) (undo-tree-id17 . -1) (undo-tree-id18 . -1) (undo-tree-id19 . -823) (undo-tree-id20 . -1) (undo-tree-id21 . -1) (undo-tree-id22 . -1) (undo-tree-id23 . -1) (undo-tree-id24 . -1) (undo-tree-id25 . -1) (undo-tree-id26 . -1) (undo-tree-id27 . -1) (undo-tree-id28 . -1) (undo-tree-id29 . -1) (undo-tree-id30 . -1) (824 . 825)) nil (24198 6720 888752 388000) 0 nil]) ((nil rear-nonsticky nil 1 . 2) ("
+" . -824) (1 . 825) (t . -1)) nil (24198 6720 888757 976000) 0 nil]) nil nil (24198 6720 888759 666000) 0 nil] #1# 1129 2 nil)
