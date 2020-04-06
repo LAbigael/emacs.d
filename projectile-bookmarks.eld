@@ -1,1 +1,1 @@
-("~/code/conquerline/" "~/code/goha/" "~/code/uncompagnon.fr/" "~/code/safir-dashboard/" "~/code/safir-api/" "~/code/react-dnd-example/" "~/code/keystone/" "~/code/dev-cli/" "~/code/busexchange-api/" "~/code/busexchange/")
+("~/code/uncompagnon.fr/" "~/code/safir-dashboard/" "~/code/safir-api/" "~/code/react-dnd-example/" "~/code/keystone/" "~/code/goha/" "~/code/dev-cli/" "~/code/conquerline/" "~/code/busexchange-api/" "~/code/busexchange/")

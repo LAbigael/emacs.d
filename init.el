@@ -20,7 +20,7 @@
 (setq package-archives '(("melpa"     . "https://melpa.org/packages/")
                          ("gnu"       . "http://elpa.gnu.org/packages/")
                          ))
- (package-initialize) ; guess what this one does ?
+(package-initialize) ; guess what this one does ?
 
 ;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package) ; unless it is already installed
@@ -41,11 +41,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (evil general use-package org magit htmlize))))
+ '(package-selected-packages
+   (quote
+    (format-all format-all-buffer flycheck company tide evil general use-package org magit htmlize))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance
+ ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
 
@@ -57,7 +59,7 @@
 
 ;; Load theme
 (use-package gruvbox-theme :ensure t)
-(load-theme 'gruvbox-dark-hard t)
+(load-theme 'gruvbox t)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -75,30 +77,30 @@
    :prefix "SPC"
    :non-normal-prefix "C-SPC"
 
-    ;; simple command
-    "'"   '(iterm-focus :which-key "iterm")
-    "?"   '(iterm-goto-filedir-or-home :which-key "iterm - goto dir")
-    "/"   'counsel-ag
-    "TAB" '(switch-to-other-buffer :which-key "prev buffer")
-    "SPC" '(projectile-find-file  :which-key "find file")
+   ;; simple command
+   "'"   '(iterm-focus :which-key "iterm")
+   "?"   '(iterm-goto-filedir-or-home :which-key "iterm - goto dir")
+   "/"   'counsel-ag
+   "TAB" '(switch-to-other-buffer :which-key "prev buffer")
+   "SPC" '(projectile-find-file  :which-key "find file")
 
-    ;; Applications
-    "a" '(:ignore t :which-key "Applications")
-    "ar" 'ranger
-    "ad" 'dired
-    ;; Seach
-    ;; buffer related
-    "b" '(:ignore t :which-key "buffer")
-    "bb" 'ivy-switch-buffer
-    "bs" 'swiper
-    ;; file related
-    "f" '(:ignore t :which-key "file")
-    "ff" 'counsel-find-file
-    ;; project related
-    "p" '(:ignore t :which-key "project")
-    "pp" 'projectile-switch-project
-    "ps" 'projectile-switch-open-project
-     ))
+   ;; Applications
+   "a" '(:ignore t :which-key "Applications")
+   "ar" 'ranger
+   "ad" 'dired
+   ;; Seach
+   ;; buffer related
+   "b" '(:ignore t :which-key "buffer")
+   "bb" 'ivy-switch-buffer
+   "bs" 'swiper
+   ;; file related
+   "f" '(:ignore t :which-key "file")
+   "ff" 'counsel-find-file
+   ;; project related
+   "p" '(:ignore t :which-key "project")
+   "pp" 'projectile-switch-project
+   "ps" 'projectile-switch-open-project
+   ))
 
 (use-package swiper :ensure t)
 (use-package counsel :ensure t)
@@ -112,3 +114,27 @@
   )
 
 (defvar default-ecb-source-path (list '("~/code/")))
+
+
+;; js development
+
+(use-package tide :ensure t)
+(use-package company :ensure t)
+(use-package flycheck :ensure t)
+(defun setup-tide-mode ()
+  "Setup function for tide."
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  (company-mode +1))
+
+(setq company-tooltip-align-annotations t)
+
+(add-hook 'js-mode-hook #'setup-tide-mode)
+
+(add-hook 'js-mode-hook 'prettier-js-mode)
+
+

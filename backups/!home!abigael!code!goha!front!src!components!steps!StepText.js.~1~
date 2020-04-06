@@ -1,0 +1,114 @@
+import React from "react";
+import Button from "../form/Button";
+
+const displayText = ({ text, entities, deleteEntity }) => {
+  const colorByType = {
+    ingredient: "#8EA4D2",
+    equipment: "#49516F",
+    timing: "#496F5D",
+    technique: "#4C9F70"
+  };
+
+  // const entities = {
+  //   equipments: [
+  //     {
+  //       start: 2,
+  //       end: 6,
+  //       len: 5,
+  //       levenshtein: 0,
+  //       accuracy: 1,
+  //       entity: "equipment",
+  //       type: "enum",
+  //       option: "poêle",
+  //       sourceText: "poêle",
+  //       utteranceText: "poele"
+  //     }
+  //   ],
+  //   ingredients: [
+  //     {
+  //       start: 10,
+  //       end: 23,
+  //       len: 14,
+  //       levenshtein: 0,
+  //       accuracy: 1,
+  //       entity: "ingredient",
+  //       type: "enum",
+  //       option: "pomme de terre",
+  //       sourceText: "pomme de terre",
+  //       utteranceText: "pomme de terre",
+  //       amount: { unit: "pce", quantity: "2" }
+  //     },
+  //     {
+  //       start: 10,
+  //       end: 14,
+  //       len: 5,
+  //       levenshtein: 0,
+  //       accuracy: 1,
+  //       entity: "ingredient",
+  //       type: "enum",
+  //       option: "pomme",
+  //       sourceText: "pomme",
+  //       utteranceText: "pomme",
+  //       amount: { unit: "pce", quantity: "2" }
+  //     }
+  //   ],
+  //   timings: [],
+  //   techniques: []
+  // };
+
+  const isAnEntity = i => {
+    let entityFound;
+    console.log(entities);
+    Object.keys(entities).map(entityName => {
+      if (entities[entityName]) {
+        entities[entityName].map(entity => {
+          if (entity && entity.start === i) {
+            entityFound = entity;
+          }
+        });
+      }
+    });
+    if (entityFound) {
+      const { start, end, entity } = entityFound;
+      return { start, end, entity };
+    }
+    return {};
+  };
+
+  let currentEntity = {}; // {start, end, type}
+
+  const textToDisplay = text.split("").map((c, i) => {
+    if (currentEntity.end && i <= currentEntity.end) {
+      return "";
+    }
+    const { start, end, entity: type } = isAnEntity(i);
+    if (start) {
+      currentEntity.start = i;
+      currentEntity.end = end;
+      currentEntity.type = type;
+      return (
+        <>
+          <span style={{ fontWeight: "bold", color: colorByType[type] }}>
+            {text.substring(start, end + 1)}
+          </span>
+          <button
+            type="button"
+            style={{ color: "red" }}
+            onPress={deleteEntity(start)}
+          >
+            x
+          </button>
+        </>
+      );
+    }
+    return c;
+  });
+
+  return <div className="Container"> {textToDisplay} </div>;
+
+  // remove highting (remove entity from the list)
+  // chose between two entities statring at the same index
+  //return textToDisplay;
+};
+
+export default displayText;
